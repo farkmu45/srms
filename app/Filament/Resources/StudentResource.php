@@ -3,9 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\StudentResource\Pages;
-use App\Filament\Resources\StudentResource\RelationManagers;
 use App\Models\Student;
-use Filament\Forms;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -14,8 +12,6 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class StudentResource extends Resource
 {
@@ -49,8 +45,8 @@ class StudentResource extends Resource
                             )->required(),
                         TextInput::make('origin')
                             ->required()
-                            ->maxLength(200)
-                    ])->columns()
+                            ->maxLength(200),
+                    ])->columns(),
             ]);
     }
 
@@ -72,7 +68,7 @@ class StudentResource extends Resource
                     ->sortable(),
                 TextColumn::make('origin')
                     ->searchable()
-                    ->sortable()
+                    ->sortable(),
             ])
             ->filters([
                 //

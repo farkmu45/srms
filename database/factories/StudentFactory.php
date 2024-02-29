@@ -20,7 +20,7 @@ class StudentFactory extends Factory
             'name' => fake()->name(),
             'matrix' => fake()->unique()->numberBetween(100000000000, 999999999999),
             'semester' => fake()->numberBetween(1, 8),
-            'origin' => fake()->address()
+            'origin' => fake()->address(),
         ];
     }
 }

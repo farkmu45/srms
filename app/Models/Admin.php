@@ -25,7 +25,6 @@ class Admin extends Authenticatable implements FilamentUser
         'remember_token',
     ];
 
-
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
