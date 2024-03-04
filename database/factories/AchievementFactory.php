@@ -6,9 +6,9 @@ use App\Models\Student;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\MedicalHistory>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Achievement>
  */
-class MedicalHistoryFactory extends Factory
+class AchievementFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,7 +19,7 @@ class MedicalHistoryFactory extends Factory
     {
         return [
             'details' => fake()->words(40, true),
-            'student_id' => Student::factory(),
+            'student_id' => Student::factory()
         ];
     }
 }
