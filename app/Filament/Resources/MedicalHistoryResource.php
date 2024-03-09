@@ -8,6 +8,7 @@ use App\Models\Student;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Forms\Set;
@@ -59,8 +60,9 @@ class MedicalHistoryResource extends Resource
                             ->live(),
                         TextInput::make('matrix')
                             ->readOnly(),
-                        RichEditor::make('details')
+                        Textarea::make('details')
                             ->required()
+                            ->rows(10)
                             ->columnSpanFull(),
                     ])->columns(),
             ]);
