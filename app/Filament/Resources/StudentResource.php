@@ -4,6 +4,8 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\StudentResource\Pages;
 use App\Models\Student;
+use Cheesegrits\FilamentPhoneNumbers\Forms\Components\PhoneNumber;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -12,6 +14,8 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use libphonenumber\PhoneNumberType;
+use Ysfkaya\FilamentPhoneInput\Forms\PhoneInput;
 
 class StudentResource extends Resource
 {
@@ -49,6 +53,24 @@ class StudentResource extends Resource
                             ->required()
                             ->label('Nationality')
                             ->searchable(),
+                        DatePicker::make('date_of_birth')
+                            ->required()
+                            ->native(false)
+                            ->displayFormat('Y-m-d')
+                            ->maxDate(now()),
+                        PhoneInput::make('phone_number')
+                            ->defaultCountry('my')
+                            ->validateFor(type: PhoneNumberType::MOBILE)
+                            ->initialCountry('my')
+                            ->required(),
+                        TextInput::make('parent_name')
+                            ->required()
+                            ->maxLength(200),
+                        PhoneInput::make('parent_phone_number')
+                            ->defaultCountry('my')
+                            ->validateFor(type: PhoneNumberType::MOBILE)
+                            ->initialCountry('my')
+                            ->required(),
                     ])->columns(),
             ]);
     }
