@@ -43,9 +43,12 @@ class StudentResource extends Resource
                             ->options(
                                 range(1, 8)
                             )->required(),
-                        TextInput::make('origin')
+                        Select::make('country_id')
+                            ->relationship('country', 'name')
+                            ->preload()
                             ->required()
-                            ->maxLength(200),
+                            ->label('Nationality')
+                            ->searchable(),
                     ])->columns(),
             ]);
     }
@@ -66,7 +69,8 @@ class StudentResource extends Resource
                     ->searchable(),
                 TextColumn::make('semester')
                     ->sortable(),
-                TextColumn::make('origin')
+                TextColumn::make('country.name')
+                    ->label('Nationality')
                     ->searchable()
                     ->sortable(),
             ])

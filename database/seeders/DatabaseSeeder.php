@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call(CountriesSeeder::class);
         Student::factory(30)->create();
         MedicalHistory::factory(10)->create();
         Achievement::factory(10)->create();

@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('name', 200);
             $table->string('matrix', 12)->unique();
             $table->unsignedTinyInteger('semester');
-            $table->string('origin', 200);
             $table->timestamps();
         });
     }
