@@ -46,6 +46,7 @@ class MedicalHistoryResource extends Resource
                                 ) : $query
                             )
                             ->native(false)
+                            ->disabledOn('edit')
                             ->preload()
                             ->required()
                             ->unique(ignoreRecord: true)
