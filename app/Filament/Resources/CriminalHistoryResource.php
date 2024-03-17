@@ -42,16 +42,24 @@ class CriminalHistoryResource extends Resource
                             ->relationship(
                                 name: 'student',
                                 titleAttribute: 'name',
-                                modifyQueryUsing: fn (Builder $query) => $query->whereNotIn(
+                                modifyQueryUsing: fn (Builder $query, string $operation) => $operation !== 'edit' ? $query->whereNotIn(
                                     'id',
-                                    fn ($query) => $query->select('student_id')->from('medical_history')
-                                )
+                                    fn ($query) => $query->select('student_id')->from('criminal_history')
+                                ) : $query
                             )
                             ->native(false)
                             ->preload()
                             ->required()
                             ->searchable()
-                            ->unique()
+                            ->disabledOn('edit')
+                            ->unique(ignoreRecord: true)
+                            ->afterStateHydrated(function (?string $state, Set $set) {
+                                if ($state) {
+                                    $set('matrix', Student::find($state)->matrix);
+                                } else {
+                                    $set('matrix', null);
+                                }
+                            })
                             ->afterStateUpdated(function (?string $state, Set $set) {
                                 if ($state) {
                                     $set('matrix', Student::find($state)->matrix);
