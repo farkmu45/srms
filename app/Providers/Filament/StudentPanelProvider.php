@@ -40,7 +40,7 @@ class StudentPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Student/Widgets'), for: 'App\\Filament\\Student\\Widgets')
             ->widgets([
-                Widgets\AccountWidget::class
+                Widgets\AccountWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,

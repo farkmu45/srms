@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Webpatser\Countries\Countries;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Student>
@@ -23,7 +22,7 @@ class StudentFactory extends Factory
             'semester' => fake()->numberBetween(1, 8),
             'parent_name' => fake()->name(),
             'date_of_birth' => fake()->date(),
-            'phone_number'=> fake()->e164PhoneNumber(),
+            'phone_number' => fake()->e164PhoneNumber(),
             'parent_phone_number' => fake()->e164PhoneNumber(),
             'country_id' => 4,
         ];

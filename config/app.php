@@ -170,7 +170,7 @@ return [
         App\Providers\Filament\AdminPanelProvider::class,
         App\Providers\Filament\StudentPanelProvider::class,
         App\Providers\RouteServiceProvider::class,
-        'Webpatser\Countries\CountriesServiceProvider'
+        'Webpatser\Countries\CountriesServiceProvider',
     ])->toArray(),
 
     /*
@@ -185,7 +185,7 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        'Countries' => 'Webpatser\Countries\CountriesFacade'
+        'Countries' => 'Webpatser\Countries\CountriesFacade',
     ])->toArray(),
 
 ];

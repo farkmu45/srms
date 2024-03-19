@@ -19,7 +19,7 @@ class AchievementFactory extends Factory
     {
         return [
             'details' => fake()->words(40, true),
-            'student_id' => Student::factory()
+            'student_id' => Student::factory(),
         ];
     }
 }

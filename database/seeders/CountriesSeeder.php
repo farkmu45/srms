@@ -1,25 +1,28 @@
 <?php
+
 namespace Database\Seeders;
 
 use DB;
 use Illuminate\Database\Seeder;
 use Webpatser\Countries\Countries;
 
-class CountriesSeeder extends Seeder {
+class CountriesSeeder extends Seeder
+{
     /**
      * Run the database seeds.
      *
      * @return void
      */
-    public function run() {
+    public function run()
+    {
         //Empty the countries table
         DB::table(\Config::get('countries.table_name'))->delete();
 
         //Get all of the countries
         $countryModel = new Countries();
         $countries = $countryModel->getList();
-        foreach ($countries as $countryId => $country){
-            DB::table(\Config::get('countries.table_name'))->insert(array(
+        foreach ($countries as $countryId => $country) {
+            DB::table(\Config::get('countries.table_name'))->insert([
                 'id' => $countryId,
                 'capital' => ((isset($country['capital'])) ? $country['capital'] : null),
                 'citizenship' => ((isset($country['citizenship'])) ? $country['citizenship'] : null),
@@ -34,11 +37,11 @@ class CountriesSeeder extends Seeder {
                 'name' => $country['name'],
                 'region_code' => $country['region-code'],
                 'sub_region_code' => $country['sub-region-code'],
-                'eea' => (bool)$country['eea'],
+                'eea' => (bool) $country['eea'],
                 'calling_code' => $country['calling_code'],
                 'currency_symbol' => ((isset($country['currency_symbol'])) ? $country['currency_symbol'] : null),
-                'flag' =>((isset($country['flag'])) ? $country['flag'] : null),
-            ));
+                'flag' => ((isset($country['flag'])) ? $country['flag'] : null),
+            ]);
         }
     }
 }
