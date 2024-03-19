@@ -2,6 +2,8 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Pages\Auth\EditProfile;
+use App\Filament\Pages\Auth\Login;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -24,7 +26,10 @@ class StudentPanelProvider extends PanelProvider
     {
         return $panel
             ->id('student')
-            ->path('student')
+            ->path('')
+            ->login(Login::class)
+            ->sidebarCollapsibleOnDesktop()
+            ->profile(isSimple: false, page: EditProfile::class)
             ->colors([
                 'primary' => Color::Amber,
             ])
@@ -35,8 +40,7 @@ class StudentPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Student/Widgets'), for: 'App\\Filament\\Student\\Widgets')
             ->widgets([
-                Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
+                Widgets\AccountWidget::class
             ])
             ->middleware([
                 EncryptCookies::class,

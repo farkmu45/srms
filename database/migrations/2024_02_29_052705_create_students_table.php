@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('parent_name', 200);
             $table->string('phone_number', 15);
             $table->string('parent_phone_number', 15);
+            $table->string('password');
+            $table->rememberToken();
             $table->timestamps();
         });
     }
