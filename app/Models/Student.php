@@ -6,6 +6,7 @@ use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Webpatser\Countries\Countries;
 
@@ -27,6 +28,10 @@ class Student extends Authenticatable implements FilamentUser
     public function country(): BelongsTo
     {
         return $this->belongsTo(Countries::class);
+    }
+
+    public function medicalHistory() : HasOne {
+        return $this->hasOne(MedicalHistory::class);
     }
 
     public function canAccessPanel(Panel $panel): bool
