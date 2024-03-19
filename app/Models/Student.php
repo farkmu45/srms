@@ -30,8 +30,14 @@ class Student extends Authenticatable implements FilamentUser
         return $this->belongsTo(Countries::class);
     }
 
-    public function medicalHistory() : HasOne {
+    public function medicalHistory(): HasOne
+    {
         return $this->hasOne(MedicalHistory::class);
+    }
+
+    public function criminalHistory(): HasOne
+    {
+        return $this->hasOne(CriminalHistory::class);
     }
 
     public function canAccessPanel(Panel $panel): bool
