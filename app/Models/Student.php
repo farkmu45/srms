@@ -40,6 +40,11 @@ class Student extends Authenticatable implements FilamentUser
         return $this->hasOne(CriminalHistory::class);
     }
 
+    public function achievement(): HasOne
+    {
+        return $this->hasOne(Achievement::class);
+    }
+
     public function canAccessPanel(Panel $panel): bool
     {
         return true;
