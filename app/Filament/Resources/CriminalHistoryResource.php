@@ -21,7 +21,7 @@ class CriminalHistoryResource extends Resource
 {
     protected static ?string $model = CriminalHistory::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-scale';
 
     protected static ?string $slug = 'criminal-history';
 
