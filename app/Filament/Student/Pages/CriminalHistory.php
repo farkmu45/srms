@@ -13,6 +13,6 @@ class CriminalHistory extends Page
     public ?string $criminalHistory = null;
 
     public function mount() {
-        $this->criminalHistory = auth()->user()->criminalHistory->details;
+        $this->criminalHistory = auth()->user()->criminalHistory->details ?? null;
     }
 }
