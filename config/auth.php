@@ -46,8 +46,8 @@ return [
         ],
         'mentor' => [
             'driver' => 'session',
-            'provider' => 'mentors'
-        ]
+            'provider' => 'mentors',
+        ],
     ],
 
     /*

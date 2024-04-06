@@ -12,7 +12,8 @@ class MedicalHistory extends Page
 
     public ?string $medicalHistory = null;
 
-    public function mount() {
+    public function mount()
+    {
         $this->medicalHistory = auth()->user()->medicalHistory->details ?? null;
     }
 }

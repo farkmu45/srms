@@ -19,7 +19,6 @@ class Achievements extends Page implements HasTable
 
     protected static ?string $title = 'Student Achievement';
 
-
     public function table(Table $table): Table
     {
         return $table
@@ -37,7 +36,7 @@ class Achievements extends Page implements HasTable
                     ->searchable(),
                 TextColumn::make('details')
                     ->label('Achievement')
-                    ->wrap()
+                    ->wrap(),
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([

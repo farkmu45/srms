@@ -12,7 +12,8 @@ class Achievement extends Page
 
     public ?string $achievement = null;
 
-    public function mount() {
+    public function mount()
+    {
         $this->achievement = auth()->user()->achievement?->details ?? null;
     }
 }

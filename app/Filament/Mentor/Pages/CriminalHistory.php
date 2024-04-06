@@ -34,7 +34,7 @@ class CriminalHistory extends Page implements HasTable
                     ->searchable(),
                 TextColumn::make('details')
                     ->label('Criminal History')
-                    ->wrap()
+                    ->wrap(),
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([

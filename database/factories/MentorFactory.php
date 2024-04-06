@@ -20,7 +20,7 @@ class MentorFactory extends Factory
             'name' => fake()->name(),
             'username' => fake()->userName(),
             'phone_number' => fake()->e164PhoneNumber(),
-            'password' => 'password'
+            'password' => 'password',
         ];
     }
 }

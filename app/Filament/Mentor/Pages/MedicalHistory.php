@@ -33,7 +33,7 @@ class MedicalHistory extends Page implements HasTable
                     ->label('Matrix')
                     ->searchable(),
                 TextColumn::make('details')
-                    ->wrap()
+                    ->wrap(),
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([
