@@ -2,14 +2,14 @@
 
 namespace App\Filament\Mentor\Pages;
 
-use App\Models\MedicalHistory as ModelsMedicalHistory;
+use App\Models\CriminalHistory as ModelsCriminalHistory;
 use Filament\Pages\Page;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
 
-class MedicalHistory extends Page implements HasTable
+class CriminalHistory extends Page implements HasTable
 {
     use InteractsWithTable;
 
@@ -20,7 +20,7 @@ class MedicalHistory extends Page implements HasTable
     public function table(Table $table): Table
     {
         return $table
-            ->query(ModelsMedicalHistory::query())
+            ->query(ModelsCriminalHistory::query())
             ->columns([
                 TextColumn::make('no')
                     ->label('No.')
@@ -33,6 +33,7 @@ class MedicalHistory extends Page implements HasTable
                     ->label('Matrix')
                     ->searchable(),
                 TextColumn::make('details')
+                    ->label('Criminal History')
                     ->wrap()
             ])
             ->defaultSort('created_at', 'desc')

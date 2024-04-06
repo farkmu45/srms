@@ -28,8 +28,6 @@ class Achievements extends Page implements HasTable
                 TextColumn::make('no')
                     ->label('No.')
                     ->rowIndex(),
-                TextColumn::make('created_at')
-                    ->hidden(),
                 TextColumn::make('student.name')
                     ->label('Name')
                     ->searchable()

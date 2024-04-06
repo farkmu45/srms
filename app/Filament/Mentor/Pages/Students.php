@@ -27,8 +27,6 @@ class Students extends Page implements HasTable
                 TextColumn::make('no')
                     ->label('No.')
                     ->rowIndex(),
-                TextColumn::make('id')
-                    ->hidden(),
                 TextColumn::make('name')
                     ->searchable()
                     ->sortable(),
@@ -40,7 +38,7 @@ class Students extends Page implements HasTable
                     ->sortable()
                     ->searchable(),
             ])
-            ->defaultSort('id', 'desc')
+            ->defaultSort('created_at', 'desc')
             ->filters([
                 // ...
             ])
