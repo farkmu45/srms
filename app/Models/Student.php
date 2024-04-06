@@ -49,4 +49,9 @@ class Student extends Authenticatable implements FilamentUser
     {
         return true;
     }
+
+    public static function booted() : void
+    {
+        static::creating(fn (Student $student) => $student['password'] = $student['matrix']);
+    }
 }
