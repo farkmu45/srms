@@ -7,6 +7,7 @@ namespace Database\Seeders;
 use App\Models\Achievement;
 use App\Models\CriminalHistory;
 use App\Models\MedicalHistory;
+use App\Models\Mentor;
 use App\Models\Student;
 use Illuminate\Database\Seeder;
 
@@ -22,6 +23,7 @@ class DatabaseSeeder extends Seeder
         MedicalHistory::factory(10)->create();
         CriminalHistory::factory(10)->create();
         Achievement::factory(10)->create();
+        Mentor::factory(10)->create();
 
         \App\Models\Admin::factory()->create([
             'name' => 'Admin Test',
