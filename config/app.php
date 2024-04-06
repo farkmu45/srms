@@ -169,8 +169,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\Filament\AdminPanelProvider::class,
         App\Providers\Filament\StudentPanelProvider::class,
+        App\Providers\Filament\MentorPanelProvider::class,
         App\Providers\RouteServiceProvider::class,
-        'Webpatser\Countries\CountriesServiceProvider',
     ])->toArray(),
 
     /*
@@ -183,9 +183,4 @@ return [
     | the aliases are "lazy" loaded so they don't hinder performance.
     |
     */
-
-    'aliases' => Facade::defaultAliases()->merge([
-        'Countries' => 'Webpatser\Countries\CountriesFacade',
-    ])->toArray(),
-
 ];

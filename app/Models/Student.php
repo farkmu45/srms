@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Webpatser\Countries\Countries;
 
 class Student extends Authenticatable implements FilamentUser
 {
@@ -27,7 +26,7 @@ class Student extends Authenticatable implements FilamentUser
 
     public function country(): BelongsTo
     {
-        return $this->belongsTo(Countries::class);
+        return $this->belongsTo(Country::class);
     }
 
     public function medicalHistory(): HasOne
