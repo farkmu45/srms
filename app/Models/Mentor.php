@@ -27,4 +27,9 @@ class Mentor extends Authenticatable implements FilamentUser
     {
         return true;
     }
+
+    public static function booted(): void
+    {
+        static::creating(fn (Mentor $mentor) => $mentor['password'] = $mentor['username']);
+    }
 }

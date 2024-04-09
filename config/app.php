@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
 
 return [
@@ -182,4 +183,8 @@ return [
     | the aliases are "lazy" loaded so they don't hinder performance.
     |
     */
+
+    'aliases' => Facade::defaultAliases()->merge([
+        'Js' => \Illuminate\Support\Js::class,
+    ])->toArray(),
 ];

@@ -2,30 +2,33 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\StudentResource\Pages;
-use App\Models\Student;
-use Filament\Forms\Components\DatePicker;
+use App\Filament\Resources\MentorResource\Pages;
+use App\Filament\Resources\MentorResource\RelationManagers;
+use App\Models\Mentor;
+use Filament\Forms;
 use Filament\Forms\Components\Section;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Support\Facades\Password;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Validation\Rules\Password;
 use libphonenumber\PhoneNumberType;
 use Ysfkaya\FilamentPhoneInput\Forms\PhoneInput;
 
-class StudentResource extends Resource
+class MentorResource extends Resource
 {
-    protected static ?string $model = Student::class;
+    protected static ?string $model = Mentor::class;
 
-    protected static ?string $label = 'student data';
+    protected static ?string $label = 'mentor data';
 
     protected static ?string $recordTitleAttribute = 'name';
 
-    protected static ?string $pluralLabel = 'Student Data';
+    protected static ?string $pluralLabel = 'Mentor Data';
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
@@ -38,38 +41,15 @@ class StudentResource extends Resource
                         TextInput::make('name')
                             ->maxLength(200)
                             ->required(),
-                        TextInput::make('matrix')
-                            ->maxLength(12)
-                            ->minLength(12)
-                            ->required()
-                            ->numeric(),
-                        Select::make('semester')
-                            ->options(
-                                range(1, 8)
-                            )->required(),
-                        Select::make('country_id')
-                            ->relationship('country', 'name')
-                            ->preload()
-                            ->required()
-                            ->label('Nationality')
-                            ->searchable(),
-                        DatePicker::make('date_of_birth')
-                            ->required()
-                            ->native(false)
-                            ->displayFormat('Y-m-d')
-                            ->maxDate(now()),
+                        TextInput::make('username')
+                            ->maxLength(200)
+                            ->unique(ignoreRecord: true)
+                            ->required(),
                         PhoneInput::make('phone_number')
                             ->defaultCountry('my')
                             ->validateFor(type: PhoneNumberType::MOBILE)
                             ->initialCountry('my')
-                            ->required(),
-                        TextInput::make('parent_name')
-                            ->required()
-                            ->maxLength(200),
-                        PhoneInput::make('parent_phone_number')
-                            ->defaultCountry('my')
-                            ->validateFor(type: PhoneNumberType::MOBILE)
-                            ->initialCountry('my')
+                            ->columnSpanFull()
                             ->required(),
                         TextInput::make('password')
                             ->password()
@@ -94,23 +74,15 @@ class StudentResource extends Resource
                 TextColumn::make('name')
                     ->sortable()
                     ->searchable(),
-                TextColumn::make('matrix')
-                    ->searchable(),
-                TextColumn::make('semester')
-                    ->sortable(),
-                TextColumn::make('country.name')
-                    ->label('Nationality')
+                TextColumn::make('username')
+                    ->sortable()
                     ->searchable()
-                    ->sortable(),
             ])
-            ->filters([
-                //
-            ])
-            ->defaultSort('created_at', 'desc')
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
+            ->modifyQueryUsing(fn (Builder $query) => $query->where('deleted_at', null))
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
@@ -128,9 +100,17 @@ class StudentResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListStudents::route('/'),
-            'create' => Pages\CreateStudent::route('/create'),
-            'edit' => Pages\EditStudent::route('/{record}/edit'),
+            'index' => Pages\ListMentors::route('/'),
+            'create' => Pages\CreateMentor::route('/create'),
+            'edit' => Pages\EditMentor::route('/{record}/edit'),
         ];
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->withoutGlobalScopes([
+                SoftDeletingScope::class,
+            ]);
     }
 }
