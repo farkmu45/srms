@@ -9,6 +9,7 @@ use App\Models\CriminalHistory;
 use App\Models\MedicalHistory;
 use App\Models\Mentor;
 use App\Models\Student;
+use App\Models\Submission;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -24,6 +25,7 @@ class DatabaseSeeder extends Seeder
         CriminalHistory::factory(10)->create();
         Achievement::factory(10)->create();
         Mentor::factory(10)->create();
+        Submission::factory(10)->create();
 
         \App\Models\Admin::factory()->create([
             'name' => 'Admin Test',
