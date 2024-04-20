@@ -58,10 +58,11 @@ class Submission extends Component implements HasForms
                     ->rows(10)
                     ->required(),
                 FileUpload::make('proof')
-                    ->directory('proofs')
+                    ->directory('proofs'),
             ])
             ->statePath('data');
     }
+
     public function create(): void
     {
         dd($this->form->getState());

@@ -3,13 +3,10 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\MentorResource\Pages;
-use App\Filament\Resources\MentorResource\RelationManagers;
 use App\Models\Mentor;
-use Filament\Forms;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
-use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
@@ -59,7 +56,7 @@ class MentorResource extends Resource
                             ->hiddenOn('create')
                             ->live(debounce: 500)
                             ->rule(Password::default())
-                            ->dehydrated(fn ($state) => filled($state))
+                            ->dehydrated(fn ($state) => filled($state)),
                     ])->columns(),
             ]);
     }
@@ -76,7 +73,7 @@ class MentorResource extends Resource
                     ->searchable(),
                 TextColumn::make('username')
                     ->sortable()
-                    ->searchable()
+                    ->searchable(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

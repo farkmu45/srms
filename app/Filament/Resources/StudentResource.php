@@ -79,7 +79,7 @@ class StudentResource extends Resource
                             ->hiddenOn('create')
                             ->live(debounce: 500)
                             ->rule(Password::default())
-                            ->dehydrated(fn ($state) => filled($state))
+                            ->dehydrated(fn ($state) => filled($state)),
                     ])->columns(),
             ]);
     }
