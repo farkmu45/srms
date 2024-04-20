@@ -10,3 +10,8 @@
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+use App\Livewire\Submission;
+use Illuminate\Support\Facades\Route;
+
+Route::get('submission', Submission::class);
