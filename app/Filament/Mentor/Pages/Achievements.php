@@ -22,7 +22,9 @@ class Achievements extends Page implements HasTable
     public function table(Table $table): Table
     {
         return $table
-            ->query(Achievement::query())
+            ->query(Achievement::whereHas('student', function($query) {
+                $query->where('mentor_id', auth()->user()->id);
+             }))
             ->columns([
                 TextColumn::make('no')
                     ->label('No.')

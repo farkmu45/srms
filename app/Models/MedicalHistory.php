@@ -12,9 +12,7 @@ class MedicalHistory extends Model
 
     protected $table = 'medical_history';
 
-    protected $guarded = [''];
-
-    protected $primaryKey = 'student_id';
+    protected $guarded = ['id'];
 
     public function student(): BelongsTo
     {

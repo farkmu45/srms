@@ -6,6 +6,7 @@ use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -29,9 +30,9 @@ class Student extends Authenticatable implements FilamentUser
         return $this->belongsTo(Country::class);
     }
 
-    public function medicalHistory(): HasOne
+    public function medicalHistory(): HasMany
     {
-        return $this->hasOne(MedicalHistory::class);
+        return $this->hasMany(MedicalHistory::class);
     }
 
     public function criminalHistory(): HasOne

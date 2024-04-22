@@ -38,17 +38,11 @@ class MedicalHistoryResource extends Resource
                         Select::make('student_id')
                             ->relationship(
                                 name: 'student',
-                                titleAttribute: 'name',
-                                modifyQueryUsing: fn (Builder $query, string $operation) => $operation !== 'edit' ? $query->whereNotIn(
-                                    'id',
-                                    fn ($query) => $query->select('student_id')->from('medical_history')
-                                ) : $query
+                                titleAttribute: 'name'
                             )
                             ->native(false)
-                            ->disabledOn('edit')
                             ->preload()
                             ->required()
-                            ->unique(ignoreRecord: true)
                             ->searchable()
                             ->afterStateHydrated(function (?string $state, Set $set) {
                                 if ($state) {

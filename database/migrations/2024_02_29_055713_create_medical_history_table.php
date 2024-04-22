@@ -13,8 +13,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('medical_history', function (Blueprint $table) {
+            $table->id();
             $table->foreignIdFor(Student::class)
-                ->primary()
                 ->constrained()
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
