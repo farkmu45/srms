@@ -35,9 +35,9 @@ class Student extends Authenticatable implements FilamentUser
         return $this->hasMany(MedicalHistory::class);
     }
 
-    public function criminalHistory(): HasOne
+    public function criminalHistory(): HasMany
     {
-        return $this->hasOne(CriminalHistory::class);
+        return $this->hasMany(CriminalHistory::class);
     }
 
     public function achievements(): HasMany

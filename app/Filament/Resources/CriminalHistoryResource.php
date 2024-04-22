@@ -38,18 +38,12 @@ class CriminalHistoryResource extends Resource
                         Select::make('student_id')
                             ->relationship(
                                 name: 'student',
-                                titleAttribute: 'name',
-                                modifyQueryUsing: fn (Builder $query, string $operation) => $operation !== 'edit' ? $query->whereNotIn(
-                                    'id',
-                                    fn ($query) => $query->select('student_id')->from('criminal_history')
-                                ) : $query
+                                titleAttribute: 'name'
                             )
                             ->native(false)
                             ->preload()
                             ->required()
                             ->searchable()
-                            ->disabledOn('edit')
-                            ->unique(ignoreRecord: true)
                             ->afterStateHydrated(function (?string $state, Set $set) {
                                 if ($state) {
                                     $set('matrix', Student::find($state)->matrix);
@@ -96,6 +90,7 @@ class CriminalHistoryResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
