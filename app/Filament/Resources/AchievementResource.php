@@ -33,16 +33,11 @@ class AchievementResource extends Resource
                             ->relationship(
                                 name: 'student',
                                 titleAttribute: 'name',
-                                modifyQueryUsing: fn (Builder $query) => $query->whereNotIn(
-                                    'id',
-                                    fn ($query) => $query->select('student_id')->from('medical_history')
-                                )
                             )
                             ->native(false)
                             ->preload()
                             ->required()
                             ->searchable()
-                            ->unique()
                             ->afterStateUpdated(function (?string $state, Set $set) {
                                 if ($state) {
                                     $set('matrix', Student::find($state)->matrix);
@@ -89,6 +84,7 @@ class AchievementResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

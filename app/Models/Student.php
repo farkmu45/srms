@@ -40,9 +40,9 @@ class Student extends Authenticatable implements FilamentUser
         return $this->hasOne(CriminalHistory::class);
     }
 
-    public function achievement(): HasOne
+    public function achievements(): HasMany
     {
-        return $this->hasOne(Achievement::class);
+        return $this->hasMany(Achievement::class);
     }
 
     public function mentor(): BelongsTo
