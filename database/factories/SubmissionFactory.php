@@ -22,7 +22,7 @@ class SubmissionFactory extends Factory
             'case' => fake()->text(),
             'details' => fake()->text(),
             'proof' => fake()->image(),
-            'type' => fake()->randomElement(['CRIMINAL', 'MEDICAL', 'ACHIEVEMENT'])
+            'type' => fake()->randomElement(['CRIMINAL', 'MEDICAL', 'ACHIEVEMENT']),
         ];
     }
 }

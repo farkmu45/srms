@@ -26,7 +26,7 @@ class StudentFactory extends Factory
             'phone_number' => fake()->e164PhoneNumber(),
             'parent_phone_number' => fake()->e164PhoneNumber(),
             'country_id' => 4,
-            'mentor_id' => Mentor::factory()
+            'mentor_id' => Mentor::factory(),
         ];
     }
 }

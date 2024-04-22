@@ -3,10 +3,7 @@
 namespace App\Filament\Mentor\Resources;
 
 use App\Filament\Mentor\Resources\CriminalHistoryResource\Pages;
-use App\Filament\Mentor\Resources\CriminalHistoryResource\RelationManagers;
 use App\Models\CriminalHistory;
-use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
@@ -14,7 +11,6 @@ use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class CriminalHistoryResource extends Resource
 {
@@ -35,12 +31,10 @@ class CriminalHistoryResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()->whereHas('student', function($query) {
+        return parent::getEloquentQuery()->whereHas('student', function ($query) {
             $query->where('mentor_id', auth()->user()->id);
-         });
+        });
     }
-
-
 
     public static function infolist(Infolist $infolist): Infolist
     {

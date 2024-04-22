@@ -5,10 +5,8 @@ namespace App\Filament\Mentor\Pages;
 use App\Models\Achievement;
 use App\Models\CriminalHistory;
 use App\Models\Submission as ModelsSubmission;
-use Filament\Tables\Actions\Action;
 use Filament\Pages\Page;
-use Filament\Tables\Columns\BooleanColumn;
-use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
@@ -27,8 +25,8 @@ class Submission extends Page implements HasTable
     public function table(Table $table): Table
     {
         return $table
-            ->query(ModelsSubmission::whereHas('student', function($query) {
-               $query->where('mentor_id', auth()->user()->id);
+            ->query(ModelsSubmission::whereHas('student', function ($query) {
+                $query->where('mentor_id', auth()->user()->id);
             }))
             ->columns([
                 TextColumn::make('no')
@@ -52,7 +50,7 @@ class Submission extends Page implements HasTable
                     ->wrap(),
                 TextColumn::make('proof')
                     ->limit(20)
-                    ->url(fn (ModelsSubmission $record): string => asset('storage/' . $record->proof))
+                    ->url(fn (ModelsSubmission $record): string => asset('storage/'.$record->proof))
                     ->openUrlInNewTab(),
 
             ])
@@ -83,7 +81,7 @@ class Submission extends Page implements HasTable
 
                         $record->is_verified = true;
                         $record->save();
-                    })
+                    }),
             ])
             ->bulkActions([
                 // ...

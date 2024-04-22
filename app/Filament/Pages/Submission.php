@@ -4,7 +4,6 @@ namespace App\Filament\Pages;
 
 use App\Models\Submission as ModelsSubmission;
 use Filament\Pages\Page;
-use Filament\Tables\Columns\BooleanColumn;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
@@ -37,13 +36,13 @@ class Submission extends Page implements HasTable
                     ->label('Matrix')
                     ->searchable(),
                 TextColumn::make('case')
-                ->sortable()
-                ->searchable()
+                    ->sortable()
+                    ->searchable()
                     ->wrap(),
                 IconColumn::make('is_verified')
                     ->label('Verified')
                     ->sortable()
-                    ->boolean()
+                    ->boolean(),
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([
