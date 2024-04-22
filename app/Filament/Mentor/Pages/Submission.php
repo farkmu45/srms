@@ -27,7 +27,9 @@ class Submission extends Page implements HasTable
     public function table(Table $table): Table
     {
         return $table
-            ->query(ModelsSubmission::query())
+            ->query(ModelsSubmission::whereHas('student', function($query) {
+               $query->where('mentor_id', auth()->user()->id);
+            }))
             ->columns([
                 TextColumn::make('no')
                     ->label('No.')
