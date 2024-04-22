@@ -7,6 +7,8 @@ use App\Filament\Mentor\Resources\AchievementResource\RelationManagers;
 use App\Models\Achievement;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
@@ -25,6 +27,18 @@ class AchievementResource extends Resource
     public static function canCreate(): bool
     {
         return false;
+    }
+
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist
+            ->schema([
+                TextEntry::make('student.name'),
+                TextEntry::make('student.matrix')
+                    ->label('Matrix'),
+                TextEntry::make('details')
+                    ->columnSpanFull(),
+            ]);
     }
 
     public static function getEloquentQuery(): Builder

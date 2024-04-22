@@ -7,6 +7,8 @@ use App\Filament\Mentor\Resources\MedicalHistoryResource\RelationManagers;
 use App\Models\MedicalHistory;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
@@ -31,11 +33,15 @@ class MedicalHistoryResource extends Resource
         return false;
     }
 
-    public static function form(Form $form): Form
+    public static function infolist(Infolist $infolist): Infolist
     {
-        return $form
+        return $infolist
             ->schema([
-                //
+                TextEntry::make('student.name'),
+                TextEntry::make('student.matrix')
+                    ->label('Matrix'),
+                TextEntry::make('details')
+                    ->columnSpanFull(),
             ]);
     }
 
