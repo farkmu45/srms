@@ -43,6 +43,13 @@ class StudentResource extends Resource
                             ->minLength(12)
                             ->required()
                             ->numeric(),
+                        Select::make('mentor_id')
+                            ->relationship('mentor', 'name')
+                            ->preload()
+                            ->required()
+                            ->columnSpanFull()
+                            ->label('Mentor')
+                            ->searchable(),
                         Select::make('semester')
                             ->options(
                                 range(1, 8)

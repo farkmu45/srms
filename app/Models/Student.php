@@ -44,6 +44,11 @@ class Student extends Authenticatable implements FilamentUser
         return $this->hasOne(Achievement::class);
     }
 
+    public function mentor(): BelongsTo
+    {
+        return $this->belongsTo(Mentor::class);
+    }
+
     public function canAccessPanel(Panel $panel): bool
     {
         return true;
