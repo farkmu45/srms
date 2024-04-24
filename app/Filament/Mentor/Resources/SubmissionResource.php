@@ -16,6 +16,7 @@ use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 class SubmissionResource extends Resource
 {
@@ -36,6 +37,13 @@ class SubmissionResource extends Resource
                     ->columnSpanFull(),
                 ImageEntry::make('proof')
             ]);
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->whereHas('student', function ($query) {
+            $query->where('mentor_id', auth()->user()->id);
+        });
     }
 
     public static function table(Table $table): Table
