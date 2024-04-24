@@ -29,7 +29,6 @@ class SubmissionResource extends Resource
         return false;
     }
 
-
     public static function infolist(Infolist $infolist): Infolist
     {
         return $infolist
@@ -40,7 +39,7 @@ class SubmissionResource extends Resource
                 TextEntry::make('case'),
                 TextEntry::make('details')
                     ->columnSpanFull(),
-                ImageEntry::make('proof')
+                ImageEntry::make('proof'),
             ]);
     }
 

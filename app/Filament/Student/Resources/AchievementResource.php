@@ -38,6 +38,7 @@ class AchievementResource extends Resource
     {
         return parent::getEloquentQuery()->where('student_id', auth()->user()->id);
     }
+
     public static function table(Table $table): Table
     {
         return $table
