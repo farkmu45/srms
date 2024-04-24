@@ -3,22 +3,16 @@
 namespace App\Filament\Mentor\Resources;
 
 use App\Filament\Mentor\Resources\SubmissionResource\Pages;
-use App\Filament\Mentor\Resources\SubmissionResource\RelationManagers;
 use App\Models\Achievement;
 use App\Models\CriminalHistory;
 use App\Models\MedicalHistory;
 use App\Models\Submission;
-use Filament\Tables\Actions\Action;
-use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Components\Tab;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class SubmissionResource extends Resource
 {
@@ -52,7 +46,7 @@ class SubmissionResource extends Resource
                         false => 'Pending',
                         true => 'Approved',
                     ])
-                    ->default(false)
+                    ->default(false),
             ])
             ->actions([
                 Action::make('approve')
