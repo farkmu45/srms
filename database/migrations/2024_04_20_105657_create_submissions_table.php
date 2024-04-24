@@ -20,7 +20,7 @@ return new class extends Migration
                 ->cascadeOnUpdate();
             $table->string('case', 200);
             $table->enum('type', ['CRIMINAL', 'MEDICAL', 'ACHIEVEMENT']);
-            $table->boolean('is_verified')->default(false);
+            $table->boolean('is_approved')->default(false);
             $table->text('details');
             $table->string('proof');
             $table->timestamps();
