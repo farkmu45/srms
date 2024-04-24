@@ -66,6 +66,7 @@ class CriminalHistoryResource extends Resource
                     ->label('Criminal History')
                     ->limit(20),
             ])
+            ->defaultSort('created_at', 'desc')
             ->filters([
                 //
             ])

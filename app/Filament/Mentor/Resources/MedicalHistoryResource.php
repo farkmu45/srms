@@ -65,6 +65,7 @@ class MedicalHistoryResource extends Resource
                 TextColumn::make('details')
                     ->limit(10),
             ])
+            ->defaultSort('created_at', 'desc')
             ->filters([
                 //
             ])

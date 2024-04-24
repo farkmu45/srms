@@ -69,6 +69,7 @@ class SubmissionResource extends Resource
                     ->label('Matrix')
                     ->searchable(),
             ])
+            ->defaultSort('created_at', 'desc')
             ->filters([
                 SelectFilter::make('is_approved')
                     ->label('Status')
