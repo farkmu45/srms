@@ -7,6 +7,9 @@ use App\Models\Achievement;
 use App\Models\CriminalHistory;
 use App\Models\MedicalHistory;
 use App\Models\Submission;
+use Filament\Infolists\Components\ImageEntry;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\Action;
@@ -19,6 +22,21 @@ class SubmissionResource extends Resource
     protected static ?string $model = Submission::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist
+            ->schema([
+                TextEntry::make('student.name'),
+                TextEntry::make('student.matrix')
+                    ->label('Matrix'),
+                TextEntry::make('case'),
+                TextEntry::make('details')
+                    ->columnSpanFull(),
+                ImageEntry::make('proof')
+            ]);
+    }
 
     public static function table(Table $table): Table
     {
