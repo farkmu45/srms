@@ -1,33 +1,34 @@
 <?php
 
-namespace App\Filament\Mentor\Pages;
+namespace App\Filament\Mentor\Resources;
 
+use App\Filament\Mentor\Resources\SubmissionResource\Pages;
+use App\Filament\Mentor\Resources\SubmissionResource\RelationManagers;
 use App\Models\Achievement;
 use App\Models\CriminalHistory;
-use App\Models\Submission as ModelsSubmission;
-use Filament\Pages\Page;
+use App\Models\MedicalHistory;
+use App\Models\Submission;
 use Filament\Tables\Actions\Action;
+use Filament\Forms;
+use Filament\Forms\Form;
+use Filament\Resources\Components\Tab;
+use Filament\Resources\Resource;
+use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Concerns\InteractsWithTable;
-use Filament\Tables\Contracts\HasTable;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class Submission extends Page implements HasTable
+class SubmissionResource extends Resource
 {
-    use InteractsWithTable;
+    protected static ?string $model = Submission::class;
 
-    protected static string $view = 'filament.pages.submission';
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationIcon = 'heroicon-o-document-text';
-
-    protected static ?string $title = 'Submission';
-
-    public function table(Table $table): Table
+    public static function table(Table $table): Table
     {
         return $table
-            ->query(ModelsSubmission::whereHas('student', function ($query) {
-                $query->where('mentor_id', auth()->user()->id);
-            }))
             ->columns([
                 TextColumn::make('no')
                     ->label('No.')
@@ -43,26 +44,21 @@ class Submission extends Page implements HasTable
                 TextColumn::make('student.matrix')
                     ->label('Matrix')
                     ->searchable(),
-                TextColumn::make('details')
-                    ->label('Detail')
-                    ->sortable()
-                    ->searchable()
-                    ->wrap(),
-                TextColumn::make('proof')
-                    ->limit(20)
-                    ->url(fn (ModelsSubmission $record): string => asset('storage/'.$record->proof))
-                    ->openUrlInNewTab(),
-
             ])
-            ->defaultSort('created_at', 'desc')
             ->filters([
-                // ...
+                SelectFilter::make('is_approved')
+                    ->label('Status')
+                    ->options([
+                        false => 'Pending',
+                        true => 'Approved',
+                    ])
+                    ->default(false)
             ])
             ->actions([
                 Action::make('approve')
                     ->requiresConfirmation()
-                    ->disabled(fn (ModelsSubmission $record) => $record->is_verified)
-                    ->action(function (ModelsSubmission $record) {
+                    ->disabled(fn (Submission $record) => $record->is_approved)
+                    ->action(function (Submission $record) {
 
                         $type = $record->type;
                         $data = $record->toArray();
@@ -78,13 +74,22 @@ class Submission extends Page implements HasTable
                                 Achievement::create($data);
                                 break;
                         }
-
-                        $record->is_verified = true;
+                        $record->is_approved = true;
                         $record->save();
                     }),
+                Tables\Actions\ViewAction::make(),
             ])
             ->bulkActions([
-                // ...
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                ]),
             ]);
+    }
+
+    public static function getPages(): array
+    {
+        return [
+            'index' => Pages\ManageSubmissions::route('/'),
+        ];
     }
 }
