@@ -1,4 +1,4 @@
-<div class="mx-auto max-w-screen-lg lg:px-0" style="margin-top: 5rem; margin-bottom: 5rem">
+<div class="mx-auto max-w-screen-lg lg:px-0 my-20">
   <h1 class="text-3xl font-bold">Submission</h1>
   <form class="mt-6  flex flex-col" wire:submit="create">
     {{ $this->form }}
