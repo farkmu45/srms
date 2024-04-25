@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Student;
+use App\Models\Submission as ModelsSubmission;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -11,6 +12,7 @@ use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
 use Filament\Forms\Set;
+use Filament\Notifications\Notification;
 use Livewire\Component;
 
 class Submission extends Component implements HasForms
@@ -67,8 +69,24 @@ class Submission extends Component implements HasForms
 
     public function create(): void
     {
-        $data = $this->form->getState();
-        Submission::create($data);
+        $this->validate();
+
+        try {
+            $data = $this->form->getState();
+            ModelsSubmission::create($data);
+
+            Notification::make()
+                ->title('Submission submitted successfully')
+                ->success()
+                ->send();
+
+            $this->reset();
+        } catch (\Throwable $th) {
+            Notification::make()
+                ->title('An error occured while submitting submission')
+                ->danger()
+                ->send();
+        }
     }
 
     public function render()
