@@ -82,7 +82,7 @@ class SubmissionResource extends Resource
             ->actions([
                 Action::make('approve')
                     ->requiresConfirmation()
-                    ->disabled(fn (Submission $record) => $record->is_approved)
+                    ->hidden(fn (Submission $record) => $record->is_approved)
                     ->action(function (Submission $record) {
 
                         $type = $record->type;

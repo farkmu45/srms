@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Student;
+use Exception;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -11,6 +12,7 @@ use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
 use Filament\Forms\Set;
+use Filament\Notifications\Notification;
 use Livewire\Component;
 
 class Submission extends Component implements HasForms
@@ -58,6 +60,8 @@ class Submission extends Component implements HasForms
                     ->rows(10)
                     ->required(),
                 FileUpload::make('proof')
+                    ->required()
+                    ->image()
                     ->directory('proofs'),
             ])
             ->statePath('data');
@@ -65,7 +69,8 @@ class Submission extends Component implements HasForms
 
     public function create(): void
     {
-        dd($this->form->getState());
+        $data = $this->form->getState();
+        Submission::create($data);
     }
 
     public function render()
