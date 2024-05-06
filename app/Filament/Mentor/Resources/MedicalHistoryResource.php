@@ -71,11 +71,6 @@ class MedicalHistoryResource extends Resource
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
             ]);
     }
 
