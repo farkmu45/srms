@@ -10,7 +10,7 @@ class CriminalHistory extends Model
 {
     use HasFactory;
 
-    protected $table = 'medical_history';
+    protected $table = 'criminal_history';
 
     protected $guarded = ['id'];
 
