@@ -14,4 +14,6 @@
 use App\Livewire\Submission;
 use Illuminate\Support\Facades\Route;
 
-Route::get('submission', Submission::class);
+Route::get('submission', Submission::class)->name('submission');
+
+Route::get('welcome', fn() => view('welcome'));
