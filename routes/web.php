@@ -17,4 +17,3 @@ use Illuminate\Support\Facades\Route;
 Route::get('submission', Submission::class)->name('submission');
 
 Route::get('welcome', fn() => view('welcome'));
-Route::get('mentor/welcome', fn() => view('mentor_welcome'));
